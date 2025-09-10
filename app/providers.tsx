@@ -8,7 +8,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
       {/* <Toaster /> */}
       <ThemeProvider
         attribute="class"
-        // defaultTheme="system"
+        defaultTheme="system"
         enableSystem
         disableTransitionOnChange
       >

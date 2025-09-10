@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* @layer base{ */
-  :root {
+:root {
   --radius: 0.65rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
@@ -71,8 +72,6 @@
   --sidebar-ring: oklch(0.488 0.243 264.376);
 }
 /* } */
-
-
 
 @theme inline {
   --color-background: var(--background);
