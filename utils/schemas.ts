@@ -1,5 +1,7 @@
 import { z, ZodSchema } from "zod";
 
+// main-bucket -> bucket name supabase
+
 // export const productSchema = z.object({
 //   name: z.string().min(4),
 //   company: z.string().min(4),
@@ -50,7 +52,7 @@ const validateImageFile = () => {
     }, "File must be an image");
 };
 
-export const imageSchema = z.object({   
+export const imageSchema = z.object({
   image: validateImageFile(),
 });
 
@@ -65,3 +67,24 @@ export const validateWithZodSchema = <T>(
   }
   return result.data;
 };
+
+export const reviewSchema = z.object({
+  productId: z.string().refine((value) => value !== "", {
+    message: "Product ID cannot be empty",
+  }),
+  authorName: z.string().refine((value) => value !== "", {
+    message: "Author name cannot be empty",
+  }),
+  authorImageUrl: z.string().refine((value) => value !== "", {
+    message: "Author imgae URL cannot be empty",
+  }),
+  rating: z.coerce
+    .number()
+    .int()
+    .min(1, { message: "Rating must be at least 1" })
+    .max(5, { message: "Rating must be at most 5" }),
+  comment: z
+    .string()
+    .min(10, { message: "Commment must be at least 10 characters long" })
+    .max(1000, { message: "Comment must be at most 1000 characters long" }),
+});
